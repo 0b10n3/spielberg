@@ -65,11 +65,7 @@ whisper:            # plataforma (faster-whisper 1.2.1 README e vad.py, 25/11/20
   vad_filter: true
   jargao: initial_prompt   # ou hotwords (comparados na T1, docs/pesquisa.md)
 
-ritmo:              # regra do projeto, calibrar na Fase 3
-  palavras_por_s: 2.9
-  tomada_max_s: 20
-  cartao_palavras_max: 12
-  troca_visual_max_s: 5
+# Taxa de fala, limite da tomada e do cartão: ../hemingway/config/esteira.yaml → video (quem valida o storyboard).
 
 alinhar:
   similaridade_min: 0.80   # âncora aceita sem modelo
