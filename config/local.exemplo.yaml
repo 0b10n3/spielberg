@@ -1,0 +1,5 @@
+# Copie para config/local.yaml (fora do git) se algum caminho mudar nesta máquina.
+# Sem local.yaml, o spielberg usa este arquivo.
+midia: ~/Videos/syntaxis          # <slug>/brutos, mezanino, cartoes, previas, qa, saida
+hemingway: ../hemingway           # só leitura: posts/<slug>/distribuicao/video/storyboard.json
+marca: ../../brand                # só leitura: tokens/syntaxis.tokens.json e LOGO/

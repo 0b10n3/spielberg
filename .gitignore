@@ -1,0 +1,29 @@
+# Mídia nunca entra no git (fica em ~/Videos/syntaxis/<slug>/).
+*.mp4
+*.mov
+*.MOV
+*.mkv
+*.m4v
+*.webm
+*.wav
+*.m4a
+*.aac
+*.mp3
+*.flac
+*.png
+*.jpg
+*.jpeg
+*.heic
+# Saídas e caches
+previas/
+saida/
+mezanino/
+brutos/
+cartoes/
+qa/
+.venv/
+__pycache__/
+*.pyc
+# Configuração da máquina
+config/local.yaml
+.claude/settings.local.json

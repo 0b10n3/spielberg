@@ -1,0 +1,93 @@
+# Fonte única dos parâmetros do spielberg. Cada valor diz de onde vem:
+#   plataforma (fonte, data)  ·  marca (arquivo)  ·  regra do projeto (calibrar na Fase 3)
+# Fontes completas em docs/pesquisa.md.
+
+saida:
+  final:            # plataforma (YouTube 1722171, 25/11/2026): H.264 High, 4:2:0, AAC-LC 48 kHz, BT.709
+    largura: 1080
+    altura: 1920
+    fps: 30
+    crf: 18         # regra do projeto (80 s sintéticos em ~16 s)
+    preset: medium  # regra do projeto
+    audio_kbps: 192
+  previa:           # regra do projeto (80 s sintéticos em ~3,6 s)
+    largura: 540
+    altura: 960
+    crf: 26
+    preset: veryfast
+
+audio:              # regra do projeto: nenhuma plataforma publica alvo oficial (docs/pesquisa.md)
+  lufs: -14
+  pico_dbtp: -1
+  lra: 11
+  tolerancia_lu: 1
+  fade_s: 0.03      # referência: browser-use/video-use (Hard Rule 3)
+
+zona_segura:
+  padrao: organico  # resposta do autor no 🛑 da Fase 1 (25/11/2026)
+  # organico: lido dos tokens da marca (social.safeZone). Nunca digitar aqui.
+  anuncio:          # terceiros (lilachbullock.com, out/2026; atribui ao Ads Guide da Meta): confirmar
+    topo_pct: 14
+    base_pct: 35
+    lateral_pct: 6
+
+legenda:            # regra do projeto (piso da marca: 34 px)
+  fonte: corpo      # papel tipográfico (marca.py → Source Sans 3)
+  peso: 700
+  tamanho: 58
+  palavras_por_bloco: 4   # o storyboard pode baixar
+  linhas_max: 2
+  faixa:
+    organico: [1150, 1400]
+    anuncio: [1000, 1240]
+  caixa_opacidade: 0.85
+  caixa_padding: 18
+  entrelinha: 1.15
+  emendar_s: 0.25   # blocos separados por menos que isso ficam colados
+
+corte:              # regra do projeto, com base no video-use (≥400 ms limpo; 150–400 conferir)
+  limiar_s: 0.40    # resposta do autor no 🛑 da Fase 1
+  margem_antes_s: 0.10
+  margem_depois_s: 0.08
+  silencio_db: -35  # silencedetect: o corte só acontece em silêncio medido no áudio
+  silencio_min_s: 0.20
+  folga_cauda_s: 0.30
+
+zoom:
+  modo: corte       # punch-in seco (sem tremor por construção). Rampa: S2, depois de pesquisa
+  centro_y: 0.36    # regra do projeto: olhos perto do terço superior
+
+whisper:            # plataforma (faster-whisper 1.2.1 README e vad.py, 25/11/2026)
+  modelo: large-v3-turbo
+  compute_type: float16
+  idioma: pt
+  beam_size: 5
+  vad_filter: true
+  jargao: initial_prompt   # ou hotwords (comparados na T1, docs/pesquisa.md)
+
+ritmo:              # regra do projeto, calibrar na Fase 3
+  palavras_por_s: 2.9
+  tomada_max_s: 20
+  cartao_palavras_max: 12
+  troca_visual_max_s: 5
+
+alinhar:
+  similaridade_min: 0.80   # âncora aceita sem modelo
+  tomada_min: 0.50         # arquivo atribuído a uma tomada
+
+qa:                 # regra do projeto
+  preto_s: 0.5
+  congelado_s: 3.0  # fora dos cartões cheios
+  silencio_max_s: 1.0
+  silencio_db: -50
+
+git:
+  max_arquivo_mb: 5
+
+marca_fora_dos_tokens:   # valores da marca que ainda não estão nos tokens (proposta: levar para os tokens)
+  handle: "@syntaxis"            # brand/SOCIAL/gerador/conteudo/*.json
+  capa_numero_max: 280           # SOCIAL.md §4 (capa de Reels: número até 280 px)
+  capa_titulo: 96                # SOCIAL.md §4 (capa de Reels: título 96 px)
+  tracking_eyebrow_em: 0.08      # SOCIAL.md §3
+  entrelinha: {titulo: 1.06, corpo: 1.3, dado: 1.2}   # brand/SOCIAL/gerador/src/marca.tsx:92,112-113
+  opacidade_mesh: 0.25           # SOCIAL.md §5.3 (= pattern.mesh.opacityDecorativeMin)
